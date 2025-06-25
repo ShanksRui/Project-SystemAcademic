@@ -1,0 +1,21 @@
+# Build
+/target/
+
+# Arquivos compilados
+*.class
+
+# Logs
+*.log
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Arquivos temporários
+*.tmp
+*~
+
+# Spring config sensível
+*.env
+application-*.properties
