@@ -3,10 +3,11 @@ package com.dev.System_Academic.Entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+@Entity
 public class Subject implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -15,13 +16,13 @@ public class Subject implements Serializable{
 	private Long id;
 	
 	private String name;
-	private Integer HourQuantity;
+	private Integer hourQuantity;
 	private Double passGrade;
 	
 	public Subject(Long id, String name, Integer hourQuantity, Double passGrade) {
 		this.id = id;
 		this.name = name;
-		HourQuantity = hourQuantity;
+		this.hourQuantity = hourQuantity;
 		this.passGrade = passGrade;
 	}
 
@@ -42,11 +43,11 @@ public class Subject implements Serializable{
 	}
 
 	public Integer getHourQuantity() {
-		return HourQuantity;
+		return hourQuantity;
 	}
 
 	public void setHourQuantity(Integer hourQuantity) {
-		HourQuantity = hourQuantity;
+		this.hourQuantity = hourQuantity;
 	}
 
 	public Double getPassGrade() {
