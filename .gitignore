@@ -1,21 +1,59 @@
-# Build
-/target/
+# IDEs
+/.idea/
+/*.iml
+*.iws
+/.vscode/
 
-# Arquivos compilados
-*.class
+# Build output and dependencies
+/target/
+/build/
 
 # Logs
 *.log
 
-# IDEs
-.idea/
-*.iml
-.vscode/
-
-# Arquivos temporários
+# Temporary files
 *.tmp
-*~
+*.temp
+*.swp
+*.DS_Store
+Thumbs.db
 
-# Spring config sensível
-*.env
-application-*.properties
+# Local environment config files 
+/src/main/resources/application-test.properties
+
+# Maven wrapper files
+/.mvn/wrapper/maven-wrapper.jar
+/mvnw
+/mvnw.cmd
+
+# Gradle wrapper files
+/gradle/
+/gradlew
+/gradlew.bat
+
+# OS generated files
+*.class
+*.jar
+*.war
+
+# Cache folders
+.cache/
+/out/
+
+
+# Eclipse project files
+/.classpath
+/.project
+/.settings/
+
+# IntelliJ IDEA project files
+/.idea/
+/*.iml
+
+# NetBeans project files
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/

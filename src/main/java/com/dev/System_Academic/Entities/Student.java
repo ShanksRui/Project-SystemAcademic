@@ -1,7 +1,7 @@
 package com.dev.System_Academic.Entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -19,13 +19,13 @@ public class Student implements Serializable{
 	private Long id;
 	private String name;
 	private Double paymentCourse;
-	private LocalDate datePayment;
+	private Instant datePayment;
 	
 	public Student() {
 		
 	}
 	
-	public Student(Long id, String name, LocalDate datePayment,Double paymentCourse) {
+	public Student(Long id, String name, Instant datePayment,Double paymentCourse) {
 		this.id = id;
 		this.name = name;
 		this.datePayment = datePayment;
@@ -48,8 +48,13 @@ public class Student implements Serializable{
 		this.name = name;
 	}
 
-	public LocalDate getdatePayment() {
+	public Instant getdatePayment() {
 		return datePayment;
+	}
+	
+
+	public void setDatePayment(Instant datePayment) {
+		this.datePayment = datePayment;
 	}
 
 	@Override
