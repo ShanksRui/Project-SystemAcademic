@@ -2,12 +2,18 @@ package com.dev.System_Academic.Entities;
 
 import java.util.Objects;
 
+import org.hibernate.annotations.ManyToAny;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
+
 import com.dev.System_Academic.Entities.Enum.StatusSubject;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Enrollment {
@@ -15,17 +21,22 @@ public class Enrollment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private StatusSubject status;
+	private Integer status;
 	private Double gradeAverage;
+	
+	@ManyToOne
+	@JoinColumn(name = "student_id")
+	private Student student;
 	
 	public Enrollment() {
 		
 	}
 	
-	public Enrollment(Long id, StatusSubject status, Double gradeAverage) {
+	public Enrollment(Long id, StatusSubject status, Double gradeAverage,Student student) {
 		this.id = id;
-		this.status = status;
+		setStatus(status);
 		this.gradeAverage = gradeAverage;
+		this.student = student;
 	}
 
 	public Long getId() {
@@ -37,11 +48,11 @@ public class Enrollment {
 	}
 
 	public StatusSubject getStatus() {
-		return status;
+		return StatusSubject.StatusCodeValue(status);
 	}
 
 	public void setStatus(StatusSubject status) {
-		this.status = status;
+		this.status = status.getCode();
 	}
 
 	public Double getGradeAverage() {

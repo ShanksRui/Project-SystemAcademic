@@ -2,12 +2,17 @@ package com.dev.System_Academic.Entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Student implements Serializable{
@@ -21,6 +26,9 @@ public class Student implements Serializable{
 	private Double paymentCourse;
 	private Instant datePayment;
 	
+	@OneToMany(mappedBy = "student")
+	private Set<Enrollment> enrollments = new HashSet<>();
+	
 	public Student() {
 		
 	}
@@ -30,6 +38,10 @@ public class Student implements Serializable{
 		this.name = name;
 		this.datePayment = datePayment;
 		this.paymentCourse = paymentCourse;
+	}
+	
+	public Set<Enrollment> getEnrollments(){
+		return enrollments;
 	}
 
 	public Long getId() {
