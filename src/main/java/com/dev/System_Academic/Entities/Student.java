@@ -26,6 +26,8 @@ public class Student implements Serializable{
 	private String name;
 	private Double paymentCourse;
 	
+
+	
 	@JsonFormat(shape = Shape.STRING,pattern = "yyyy-MM-dd:'T'HH:mm:ss'Z'",timezone = "UTC")
 	private Instant datePayment;
 	
@@ -98,7 +100,4 @@ public class Student implements Serializable{
 		Student other = (Student) obj;
 		return Objects.equals(id, other.id);
 	}
-
-	
-	
 }

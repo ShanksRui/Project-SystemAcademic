@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.dev.System_Academic.Entities.Enum.StatusSubject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +24,7 @@ public class Enrollment {
 	private List<Double> StudentGrade = new ArrayList<>();
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "student_id")
 	private Student student;
 	
@@ -34,12 +36,11 @@ public class Enrollment {
 		
 	}
 	
-	public Enrollment(Long id, StatusSubject status,Student student,Subject subject) {
+	public Enrollment(Long id, StatusSubject status,Student student) {
 		this.id = id;
 		setStatus(status);
-		this.student = student;
-		this.subject = subject;
-	}
+        this.student = student;
+    }
 
 	public Long getId() {
 		return id;
@@ -61,10 +62,16 @@ public class Enrollment {
 		return StudentGrade;
 	}
 
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+	
+	public Subject getSubject() {
+		return subject;
+	}
+	public void setSubject(Subject sub) {
+		this.subject = sub;
 	}
 
 	@Override

@@ -2,7 +2,9 @@ package com.dev.System_Academic.Entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
@@ -11,6 +13,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Course implements Serializable{
@@ -23,16 +26,20 @@ public class Course implements Serializable{
 	
 	private String name;
 	private Double monthlyPayment;
-	private Integer fee;
+	private Double fee;
+	
 	
     @JsonFormat(shape = Shape.STRING,pattern = "yyyy:MM:dd'T'HH:mm:ss'Z'",timezone = "UTC")
 	private Instant limitDatePayment;
 	
+    @OneToMany(mappedBy = "course")
+    private Set<Subject> subjects = new HashSet<>();
+    
 	public Course() {
 		
 	}
 	
-	public Course(Long id, String name, Double monthlyPayment, Integer fee, Instant limitDatePayment) {
+	public Course(Long id, String name, Double monthlyPayment, Double fee, Instant limitDatePayment) {
 		this.id = id;
 		this.name = name;
 		this.monthlyPayment = monthlyPayment;
@@ -64,11 +71,11 @@ public class Course implements Serializable{
 		this.monthlyPayment = monthlyPayment;
 	}
 
-	public Integer getFee() {
+	public Double getFee() {
 		return fee;
 	}
 
-	public void setFee(Integer fee) {
+	public void setFee(Double fee) {
 		this.fee = fee;
 	}
 
@@ -83,6 +90,9 @@ public class Course implements Serializable{
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+	public Set<Subject> getSubjects(){
+		return subjects;
 	}
 
 	@Override
