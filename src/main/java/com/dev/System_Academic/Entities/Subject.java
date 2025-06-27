@@ -1,12 +1,15 @@
 package com.dev.System_Academic.Entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 @Entity
 public class Subject implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -18,6 +21,13 @@ public class Subject implements Serializable{
 	private String name;
 	private Integer hourQuantity;
 	private Double passGrade;
+	
+	@OneToMany(mappedBy = "subject")
+	private Set<Enrollment> enrollments = new HashSet<>();
+	
+	public Subject() {
+		
+	}
 	
 	public Subject(Long id, String name, Integer hourQuantity, Double passGrade) {
 		this.id = id;
@@ -56,6 +66,10 @@ public class Subject implements Serializable{
 
 	public void setPassGrade(Double passGrade) {
 		this.passGrade = passGrade;
+	}
+
+	public Set<Enrollment> getEnrollments() {
+		return enrollments;
 	}
 
 	@Override

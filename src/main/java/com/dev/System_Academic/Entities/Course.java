@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +24,8 @@ public class Course implements Serializable{
 	private String name;
 	private Double monthlyPayment;
 	private Integer fee;
+	
+    @JsonFormat(shape = Shape.STRING,pattern = "yyyy:MM:dd'T'HH:mm:ss'Z'",timezone = "UTC")
 	private Instant limitDatePayment;
 	
 	public Course() {

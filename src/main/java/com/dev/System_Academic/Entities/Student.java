@@ -6,13 +6,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Student implements Serializable{
@@ -24,10 +25,14 @@ public class Student implements Serializable{
 	private Long id;
 	private String name;
 	private Double paymentCourse;
+	
+	@JsonFormat(shape = Shape.STRING,pattern = "yyyy-MM-dd:'T'HH:mm:ss'Z'",timezone = "UTC")
 	private Instant datePayment;
 	
 	@OneToMany(mappedBy = "student")
 	private Set<Enrollment> enrollments = new HashSet<>();
+	
+	
 	
 	public Student() {
 		

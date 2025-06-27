@@ -1,10 +1,8 @@
 package com.dev.System_Academic.Entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-
-import org.hibernate.annotations.ManyToAny;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 
 import com.dev.System_Academic.Entities.Enum.StatusSubject;
 
@@ -22,21 +20,25 @@ public class Enrollment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Integer status;
-	private Double gradeAverage;
+	private List<Double> StudentGrade = new ArrayList<>();
 	
 	@ManyToOne
 	@JoinColumn(name = "student_id")
 	private Student student;
 	
+	@ManyToOne
+	@JoinColumn(name = "subject_id")
+	private Subject subject;
+	
 	public Enrollment() {
 		
 	}
 	
-	public Enrollment(Long id, StatusSubject status, Double gradeAverage,Student student) {
+	public Enrollment(Long id, StatusSubject status,Student student,Subject subject) {
 		this.id = id;
 		setStatus(status);
-		this.gradeAverage = gradeAverage;
 		this.student = student;
+		this.subject = subject;
 	}
 
 	public Long getId() {
@@ -54,14 +56,11 @@ public class Enrollment {
 	public void setStatus(StatusSubject status) {
 		this.status = status.getCode();
 	}
-
-	public Double getGradeAverage() {
-		return gradeAverage;
+	
+	public List<Double> getStudentGrade() {
+		return StudentGrade;
 	}
 
-	public void setGradeAverage(Double gradeAverage) {
-		this.gradeAverage = gradeAverage;
-	}
 
 	@Override
 	public int hashCode() {
@@ -79,4 +78,6 @@ public class Enrollment {
 		Enrollment other = (Enrollment) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 }
