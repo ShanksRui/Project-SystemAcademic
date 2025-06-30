@@ -1,7 +1,7 @@
 package com.dev.System_Academic.Entities.Enum;
 
 public enum StatusSubject {
-
+	
 	INPROGRESS(1),
 	COMPLETED(2),
 	FAILED(3);
@@ -24,4 +24,5 @@ public enum StatusSubject {
 		}
 		  throw new IllegalArgumentException("Invalid code!"+ code);
 	}
+	
 }

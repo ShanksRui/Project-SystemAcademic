@@ -12,7 +12,6 @@ import com.dev.System_Academic.Entities.Course;
 import com.dev.System_Academic.Entities.Enrollment;
 import com.dev.System_Academic.Entities.Student;
 import com.dev.System_Academic.Entities.Subject;
-import com.dev.System_Academic.Entities.Enum.StatusSubject;
 import com.dev.System_Academic.Repositories.CourseRepository;
 import com.dev.System_Academic.Repositories.EnrollmentRepository;
 import com.dev.System_Academic.Repositories.StudentRepository;
@@ -42,11 +41,11 @@ public class TestConfig implements CommandLineRunner{
 		courseRepository.saveAll(Arrays.asList(co1, co2));
 
 		
-		Subject sub1 = new Subject(null, "computing networks", 16, 8.0, co1);
-		Subject sub2 = new Subject(null, "algorithms and logic", 22, 7.0, co2);
-		Subject sub3 = new Subject(null, "POO programming", 33, 5.0, co2);
+		Subject sub1 = new Subject(null, "computing networks", 16, 5.0, co1);
+		Subject sub2 = new Subject(null, "algorithms and logic", 22, 4.5, co2);
+		Subject sub3 = new Subject(null, "POO programming", 33, 4.5, co2);
 		Subject sub4 = new Subject(null, "advanced calculation", 30, 8.0, co1);
-		Subject sub5 = new Subject(null, "database", 19, 6.0, co1);
+		Subject sub5 = new Subject(null, "database", 19, 5.0, co1);
 		subjectRepository.saveAll(Arrays.asList(sub1, sub2, sub3, sub4, sub5));
 
 	
@@ -56,19 +55,19 @@ public class TestConfig implements CommandLineRunner{
 		studentRepository.saveAll(Arrays.asList(stu1, stu2, stu3));
 
 		
-		Enrollment en1 = new Enrollment(null, StatusSubject.INPROGRESS, stu1, sub1);
+		Enrollment en1 = new Enrollment(null, stu1, sub1);
 		en1.getStudentGrade().addAll(Arrays.asList(3.5,6.4,4.2));
-		Enrollment en2 = new Enrollment(null, StatusSubject.COMPLETED, stu2, sub5);
+		Enrollment en2 = new Enrollment(null, stu2, sub5);
 		en2.getStudentGrade().addAll(Arrays.asList(7.1,3.8,2.3));
-		Enrollment en3 = new Enrollment(null, StatusSubject.FAILED, stu1, sub2);
+		Enrollment en3 = new Enrollment(null, stu1, sub2);
 		en3.getStudentGrade().addAll(Arrays.asList(8.3,7.5,2.2));
-		Enrollment en4 = new Enrollment(null, StatusSubject.INPROGRESS, stu3, sub3);
+		Enrollment en4 = new Enrollment(null, stu3, sub3);
 		en4.getStudentGrade().addAll(Arrays.asList(10.0,2.9,3.0));
-		Enrollment en5 = new Enrollment(null, StatusSubject.COMPLETED, stu2, sub1);
+		Enrollment en5 = new Enrollment(null ,stu2, sub1);
 		en5.getStudentGrade().addAll(Arrays.asList(9.5,1.2,8.7));
-		Enrollment en6 = new Enrollment(null, StatusSubject.INPROGRESS, stu3, sub5);
+		Enrollment en6 = new Enrollment(null, stu3, sub5);
 		en6.getStudentGrade().addAll(Arrays.asList(2.1,0.4,2.6));
-		Enrollment en7 = new Enrollment(null, StatusSubject.COMPLETED, stu3, sub3);
+		Enrollment en7 = new Enrollment(null, stu3, sub3);
 		en7.getStudentGrade().addAll(Arrays.asList(3.9,5.0,4.3));
 		enrollmentRepository.saveAll(Arrays.asList(en1, en2, en3, en4, en5, en6, en7));
 

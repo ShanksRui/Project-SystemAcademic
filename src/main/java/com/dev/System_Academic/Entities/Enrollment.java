@@ -1,5 +1,8 @@
 package com.dev.System_Academic.Entities;
 
+import java.math.BigDecimal;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -36,9 +39,8 @@ public class Enrollment {
 	   
    }
 	
-	public Enrollment(Long id, StatusSubject status,Student student,Subject sub) {
+	public Enrollment(Long id,Student student,Subject sub) {
 		this.id = id;
-		setStatus(status);
         this.student = student;
         this.subject = sub;
     }
@@ -52,19 +54,34 @@ public class Enrollment {
 	}
 
 	public StatusSubject getStatus() {
-		return StatusSubject.StatusCodeValue(status);
+		int valueFinal = Fstatus();
+		this.status = valueFinal;
+		return  StatusSubject.StatusCodeValue(status);
 	}
 
-	public void setStatus(StatusSubject status) {
-		this.status = status.getCode();
-	}
-	
+	public int Fstatus() {
+		if (!StudentGrade.isEmpty()) {
+			double value = getFinalGrade();		
+		if(value < subject.getPassGrade()) {
+			return StatusSubject.FAILED.getCode();
+		}else if(value > subject.getPassGrade()){
+			return  StatusSubject.COMPLETED.getCode();
+	    }	
+		}else if(StudentGrade.isEmpty()) {
+			return StatusSubject.INPROGRESS.getCode();
+		}
+		return status;
+
+	}	
 	public List<Double> getStudentGrade() {
 		return StudentGrade;
 	}
-	public Double getTotalGrade() {
+	
+	public Double getFinalGrade() {
 	Double result = StudentGrade.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
-	return result;
+	BigDecimal bd = new BigDecimal(result);
+    bd = bd.setScale(2, RoundingMode.HALF_UP);
+	return bd.doubleValue();
 	}
 
 	@Override
