@@ -36,8 +36,14 @@ public class TestConfig implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Course co1 = new Course(null, "Computer engineering", 170.0, 0.5, Instant.parse("2023-10-27T10:00:00Z"));
-		Course co2 = new Course(null, "Information Systems", 170.0, 0.5, Instant.parse("2023-10-27T10:00:00Z"));
+		Student stu1 = new Student(null, "mell", Instant.parse("2023-10-28T10:00:00Z"));
+		Student stu2 = new Student(null, "nicolle", Instant.parse("2023-10-30T10:00:00Z"));
+		Student stu3 = new Student(null, "lisa", Instant.parse("2023-10-26T10:00:00Z"));
+		studentRepository.saveAll(Arrays.asList(stu1, stu2, stu3));
+		
+		
+		Course co1 = new Course(null, "Computer engineering", 170.0, 0.2, Instant.parse("2023-10-27T10:00:00Z"));
+		Course co2 = new Course(null, "Information Systems", 170.0, 0.05, Instant.parse("2023-10-27T10:00:00Z"));
 		courseRepository.saveAll(Arrays.asList(co1, co2));
 
 		
@@ -48,13 +54,6 @@ public class TestConfig implements CommandLineRunner{
 		Subject sub5 = new Subject(null, "database", 19, 5.0, co1);
 		subjectRepository.saveAll(Arrays.asList(sub1, sub2, sub3, sub4, sub5));
 
-	
-		Student stu1 = new Student(null, "mell", Instant.parse("2023-10-27T10:00:00Z"));
-		Student stu2 = new Student(null, "nicolle", Instant.parse("2023-10-27T10:00:00Z"));
-		Student stu3 = new Student(null, "lisa", Instant.parse("2023-10-27T10:00:00Z"));
-		studentRepository.saveAll(Arrays.asList(stu1, stu2, stu3));
-
-		
 		Enrollment en1 = new Enrollment(null, stu1, sub1);
 		en1.getStudentGrade().addAll(Arrays.asList(3.5,6.4,4.2));
 		Enrollment en2 = new Enrollment(null, stu2, sub5);
@@ -71,6 +70,5 @@ public class TestConfig implements CommandLineRunner{
 		en7.getStudentGrade().addAll(Arrays.asList(3.9,5.0,4.3));
 		enrollmentRepository.saveAll(Arrays.asList(en1, en2, en3, en4, en5, en6, en7));
 
-	  
 	}	
 }

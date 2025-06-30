@@ -14,7 +14,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Course implements Serializable{
@@ -38,6 +40,9 @@ public class Course implements Serializable{
     @JsonManagedReference
     private Set<Subject> subjects = new HashSet<>();
     
+    @OneToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
     
 	public Course() {
 		
@@ -50,8 +55,19 @@ public class Course implements Serializable{
 		this.fee = fee;
 		this.limitDatePayment = limitDatePayment;
 	}
+	public Double getTotalPriceRegistration() {
+		double tax = monthlyPayment * fee;	
+		if(student.getdatePayment().isAfter(limitDatePayment)) {
+		  return tax + monthlyPayment;
+		}else {
+			return monthlyPayment;
+		}
+		
+	}
+	public void setStudent(Student student) {
+		this.student = student;
+	}
 	
-
 	public Long getId() {
 		return id;
 	}

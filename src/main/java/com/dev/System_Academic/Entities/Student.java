@@ -14,7 +14,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Student implements Serializable{
@@ -35,6 +37,8 @@ public class Student implements Serializable{
 	@JsonManagedReference
 	private Set<Enrollment> enrollments = new HashSet<>();
 	
+	@ManyToOne()
+	private Course course;
 	
 	public Student() {
 		
