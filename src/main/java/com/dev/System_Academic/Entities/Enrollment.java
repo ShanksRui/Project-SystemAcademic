@@ -1,7 +1,6 @@
 package com.dev.System_Academic.Entities;
 
 import java.math.BigDecimal;
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,12 +53,12 @@ public class Enrollment {
 	}
 
 	public StatusSubject getStatus() {
-		int valueFinal = Fstatus();
+		int valueFinal = Generatedstatus();
 		this.status = valueFinal;
 		return  StatusSubject.StatusCodeValue(status);
 	}
 
-	public int Fstatus() {
+	private int Generatedstatus() {
 		if (!StudentGrade.isEmpty()) {
 			double value = getFinalGrade();		
 		if(value < subject.getPassGrade()) {
@@ -79,7 +78,7 @@ public class Enrollment {
 	
 	public Double getFinalGrade() {
 	Double result = StudentGrade.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
-	BigDecimal bd = new BigDecimal(result);
+	BigDecimal bd = BigDecimal.valueOf(result);
     bd = bd.setScale(2, RoundingMode.HALF_UP);
 	return bd.doubleValue();
 	}

@@ -37,7 +37,8 @@ public class Course implements Serializable{
     @OneToMany(mappedBy = "course")
     @JsonManagedReference
     private Set<Subject> subjects = new HashSet<>();
-     
+    
+    
 	public Course() {
 		
 	}
@@ -49,6 +50,7 @@ public class Course implements Serializable{
 		this.fee = fee;
 		this.limitDatePayment = limitDatePayment;
 	}
+	
 
 	public Long getId() {
 		return id;

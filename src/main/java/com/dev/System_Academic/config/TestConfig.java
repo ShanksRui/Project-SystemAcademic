@@ -49,9 +49,9 @@ public class TestConfig implements CommandLineRunner{
 		subjectRepository.saveAll(Arrays.asList(sub1, sub2, sub3, sub4, sub5));
 
 	
-		Student stu1 = new Student(null, "mell", Instant.parse("2023-10-27T10:00:00Z"), 170.00);
-		Student stu2 = new Student(null, "nicolle", Instant.parse("2023-10-27T10:00:00Z"), 170.00);
-		Student stu3 = new Student(null, "lisa", Instant.parse("2023-10-27T10:00:00Z"), 170.00);
+		Student stu1 = new Student(null, "mell", Instant.parse("2023-10-27T10:00:00Z"));
+		Student stu2 = new Student(null, "nicolle", Instant.parse("2023-10-27T10:00:00Z"));
+		Student stu3 = new Student(null, "lisa", Instant.parse("2023-10-27T10:00:00Z"));
 		studentRepository.saveAll(Arrays.asList(stu1, stu2, stu3));
 
 		

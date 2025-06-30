@@ -34,7 +34,6 @@ public class StudentService {
 
 	private void updateStudent(Student entity, Student student) {
 		entity.setName(student.getName());
-		entity.setPaymentCourse(student.getPaymentCourse());
 		entity.setDatePayment(student.getdatePayment());
 		
 	}

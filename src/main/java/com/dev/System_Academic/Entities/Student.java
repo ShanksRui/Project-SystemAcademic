@@ -25,7 +25,6 @@ public class Student implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private Double paymentCourse;
 	
 
 	
@@ -41,11 +40,10 @@ public class Student implements Serializable{
 		
 	}
 	
-	public Student(Long id, String name, Instant datePayment,Double paymentCourse) {
+	public Student(Long id, String name, Instant datePayment) {
 		this.id = id;
 		this.name = name;
 		this.datePayment = datePayment;
-		this.paymentCourse = paymentCourse;
 	}
 	
 	public Set<Enrollment> getEnrollments(){
@@ -82,14 +80,6 @@ public class Student implements Serializable{
 		return Objects.hash(id);
 	}
 
-	public Double getPaymentCourse() {
-		return paymentCourse;
-	}
-
-	public void setPaymentCourse(Double paymentCourse) {
-		this.paymentCourse = paymentCourse;
-	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
