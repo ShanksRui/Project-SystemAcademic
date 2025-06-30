@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.dev.System_Academic.Entities.Enum.StatusSubject;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,22 +24,23 @@ public class Enrollment {
 	private List<Double> StudentGrade = new ArrayList<>();
 	
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name = "student_id")
+	@JsonBackReference
 	private Student student;
 	
 	@ManyToOne
 	@JoinColumn(name = "subject_id")
 	private Subject subject;
 	
-	public Enrollment() {
-		
-	}
+   public Enrollment() {
+	   
+   }
 	
-	public Enrollment(Long id, StatusSubject status,Student student) {
+	public Enrollment(Long id, StatusSubject status,Student student,Subject sub) {
 		this.id = id;
 		setStatus(status);
         this.student = student;
+        this.subject = sub;
     }
 
 	public Long getId() {
@@ -60,6 +61,10 @@ public class Enrollment {
 	
 	public List<Double> getStudentGrade() {
 		return StudentGrade;
+	}
+	public Double getTotalGrade() {
+	Double result = StudentGrade.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
+	return result;
 	}
 
 	@Override

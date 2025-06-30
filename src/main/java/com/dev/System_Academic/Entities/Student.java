@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,8 +33,8 @@ public class Student implements Serializable{
 	private Instant datePayment;
 	
 	@OneToMany(mappedBy = "student")
+	@JsonManagedReference
 	private Set<Enrollment> enrollments = new HashSet<>();
-	
 	
 	
 	public Student() {

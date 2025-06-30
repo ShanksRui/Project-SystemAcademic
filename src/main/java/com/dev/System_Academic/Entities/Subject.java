@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -33,19 +34,20 @@ public class Subject implements Serializable{
 	private Set<Enrollment> enrollments = new HashSet<>();
 	
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name = "course_id")
 	private Course course;
 	
-
 	public Subject() {
 		
 	}
 	
-	public Subject(Long id, String name, Integer hourQuantity, Double passGrade) {
+	public Subject(Long id, String name, Integer hourQuantity, Double passGrade,Course course) {
 		this.id = id;
 		this.name = name;
 		this.hourQuantity = hourQuantity;
 		this.passGrade = passGrade;
+		this.course = course;
 	}
 
 	public Long getId() {
@@ -83,6 +85,10 @@ public class Subject implements Serializable{
 	public Set<Enrollment> getEnrollments() {
 		return enrollments;
 	}
+	
+	public Course getCourse() {
+		return course;
+	}
 
 	@Override
 	public int hashCode() {
@@ -100,6 +106,5 @@ public class Subject implements Serializable{
 		Subject other = (Subject) obj;
 		return Objects.equals(id, other.id);
 	}
-	
 	
 }

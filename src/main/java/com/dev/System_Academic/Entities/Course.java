@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,9 +33,11 @@ public class Course implements Serializable{
     @JsonFormat(shape = Shape.STRING,pattern = "yyyy:MM:dd'T'HH:mm:ss'Z'",timezone = "UTC")
 	private Instant limitDatePayment;
 	
+  
     @OneToMany(mappedBy = "course")
+    @JsonManagedReference
     private Set<Subject> subjects = new HashSet<>();
-    
+     
 	public Course() {
 		
 	}
@@ -86,15 +89,14 @@ public class Course implements Serializable{
 	public void setLimitDatePayment(Instant limitDatePayment) {
 		this.limitDatePayment = limitDatePayment;
 	}
+	public Set<Subject> getSubjects(){
+		return subjects;
+	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-	public Set<Subject> getSubjects(){
-		return subjects;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
