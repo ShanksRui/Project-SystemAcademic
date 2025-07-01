@@ -3,9 +3,11 @@ package com.dev.System_Academic.Entities;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -16,8 +18,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-
 @Entity
 public class Course implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -40,9 +40,10 @@ public class Course implements Serializable{
     @JsonManagedReference
     private Set<Subject> subjects = new HashSet<>();
     
-    @OneToOne
+    @OneToMany
+    @JsonManagedReference
     @JoinColumn(name = "student_id")
-    private Student student;
+    private Set<Student> students = new HashSet<>();
     
 	public Course() {
 		
@@ -55,18 +56,11 @@ public class Course implements Serializable{
 		this.fee = fee;
 		this.limitDatePayment = limitDatePayment;
 	}
-	public Double getTotalPriceRegistration() {
-		double tax = monthlyPayment * fee;	
-		if(student.getdatePayment().isAfter(limitDatePayment)) {
-		  return tax + monthlyPayment;
-		}else {
-			return monthlyPayment;
-		}
-		
+	
+	public Set<Student> getStudents(){
+		return students;
 	}
-	public void setStudent(Student student) {
-		this.student = student;
-	}
+	
 	
 	public Long getId() {
 		return id;

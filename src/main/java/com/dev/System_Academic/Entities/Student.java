@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -38,6 +40,7 @@ public class Student implements Serializable{
 	private Set<Enrollment> enrollments = new HashSet<>();
 	
 	@ManyToOne()
+	@JsonBackReference
 	private Course course;
 	
 	public Student() {
@@ -50,6 +53,16 @@ public class Student implements Serializable{
 		this.datePayment = datePayment;
 	}
 	
+	public Double getTotalPriceRegistration() {
+		double tax = course.getMonthlyPayment() * course.getFee();
+		for(Enrollment en :enrollments) {
+			if(course.getSubjects().contains(en.getSubject()) 
+			&& datePayment.isAfter(course.getLimitDatePayment())) {	
+			return tax += course.getMonthlyPayment();  	 
+		}		
+	}		
+	return course.getMonthlyPayment();
+}
 	public Set<Enrollment> getEnrollments(){
 		return enrollments;
 	}
