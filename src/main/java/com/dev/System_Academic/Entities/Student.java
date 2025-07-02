@@ -54,15 +54,19 @@ public class Student implements Serializable{
 	}
 	
 	public Double getTotalPriceRegistration() {
-		double tax = course.getMonthlyPayment() * course.getFee();
-		for(Enrollment en :enrollments) {
-			if(course.getSubjects().contains(en.getSubject()) 
-			&& datePayment.isAfter(course.getLimitDatePayment())) {	
-			return tax += course.getMonthlyPayment();  	 
-		}		
-	}		
-	return course.getMonthlyPayment();
-}
+	    double monthly = course.getMonthlyPayment();
+	    double feeAmount = monthly * course.getFee();
+
+	    if (datePayment != null && course != null && course.getLimitDatePayment() != null) {
+	        if (datePayment.isAfter(course.getLimitDatePayment())) {
+	            return monthly + feeAmount;
+	        } else {
+	            return monthly;
+	        }
+	    }
+	    return 0.0; 
+	}
+
 	public Set<Enrollment> getEnrollments(){
 		return enrollments;
 	}
@@ -107,5 +111,10 @@ public class Student implements Serializable{
 			return false;
 		Student other = (Student) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+		
 	}
 }

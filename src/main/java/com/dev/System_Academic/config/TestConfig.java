@@ -38,15 +38,15 @@ public class TestConfig implements CommandLineRunner{
 		
 		Course co1 = new Course(null, "Computer engineering", 170.0, 0.2, Instant.parse("2023-10-27T10:00:00Z"));
 		Course co2 = new Course(null, "Information Systems", 170.0, 0.15, Instant.parse("2023-10-27T10:00:00Z"));
-		
-		
+		courseRepository.saveAll(Arrays.asList(co1, co2));		
 		Student stu1 = new Student(null, "mell", Instant.parse("2023-10-28T10:00:00Z"));
 		Student stu2 = new Student(null, "nicolle", Instant.parse("2023-10-30T10:00:00Z"));
 		Student stu3 = new Student(null, "lisa", Instant.parse("2023-10-26T10:00:00Z"));
-	    studentRepository.saveAll(Arrays.asList(stu1, stu2, stu3));
-		co1.getStudents().addAll(Arrays.asList(stu1,stu2,stu3));
-		co2.getStudents().addAll(Arrays.asList(stu1,stu2,stu3));
-		courseRepository.saveAll(Arrays.asList(co1, co2));	    
+		    
+		stu1.setCourse(co1);
+		stu2.setCourse(co1);
+		stu3.setCourse(co1);	
+		studentRepository.saveAll(Arrays.asList(stu1, stu2, stu3));		 
 		
 		
 		Subject sub1 = new Subject(null, "computing networks", 16, 5.0, co1);
