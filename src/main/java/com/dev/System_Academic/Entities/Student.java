@@ -3,8 +3,10 @@ package com.dev.System_Academic.Entities;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -54,6 +56,7 @@ public class Student implements Serializable{
 	}
 	
 	public Double getTotalPriceRegistration() {
+		if (datePayment != null && course != null && course.getLimitDatePayment() != null) {
 	    double monthly = course.getMonthlyPayment();
 	    double feeAmount = monthly * course.getFee();
 
@@ -62,11 +65,11 @@ public class Student implements Serializable{
 	            return monthly + feeAmount;
 	        } else {
 	            return monthly;
-	        }
+	        }        
 	    }
-	    return 0.0; 
 	}
-
+		return 0.0;
+}
 	public Set<Enrollment> getEnrollments(){
 		return enrollments;
 	}
@@ -114,7 +117,14 @@ public class Student implements Serializable{
 	}
 
 	public void setCourse(Course course) {
-		this.course = course;
+		boolean value = enrollments.stream()
+			    .map(Enrollment::getSubject)
+			    .anyMatch(subject -> course.getSubjects().contains(subject));
+	    if(value) {
+	    	this.course = course;		
+		}else {
+			throw new IllegalArgumentException("subjects registration materials are not associated with this course");
+		}
 		
 	}
 }
