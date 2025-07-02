@@ -42,7 +42,7 @@ public class TestConfig implements CommandLineRunner{
 		Student stu1 = new Student(null, "mell", Instant.parse("2023-10-28T10:00:00Z"));
 		Student stu2 = new Student(null, "nicolle", Instant.parse("2023-10-30T10:00:00Z"));
 		Student stu3 = new Student(null, "lisa", Instant.parse("2023-10-26T10:00:00Z"));
-		    
+		Student stu4 = new Student(null, "jennie", Instant.parse("2023-10-26T10:00:00Z"));    
 		
 		studentRepository.saveAll(Arrays.asList(stu1, stu2, stu3));		 
 		
@@ -58,11 +58,11 @@ public class TestConfig implements CommandLineRunner{
 		Subject sub8 = new Subject(null, "Paid Media", 33, 4.5, co2);
 		subjectRepository.saveAll(Arrays.asList(sub1, sub2, sub3, sub4, sub5,sub6,sub7,sub8));
 			
-		Enrollment en1 = new Enrollment(null, stu1, sub1);
+		Enrollment en1 = new Enrollment(null, stu1, sub7);
 		en1.getStudentGrade().addAll(Arrays.asList(3.5,6.4,4.2));
 		Enrollment en2 = new Enrollment(null, stu2, sub5);
 		en2.getStudentGrade().addAll(Arrays.asList(7.1,3.8,2.3));
-		Enrollment en3 = new Enrollment(null, stu1, sub2);
+		Enrollment en3 = new Enrollment(null, stu1, sub6);
 		en3.getStudentGrade().addAll(Arrays.asList(8.3,7.5,2.2));
 		Enrollment en4 = new Enrollment(null, stu3, sub3);
 		en4.getStudentGrade().addAll(Arrays.asList(10.0,2.9,3.0));
@@ -72,7 +72,13 @@ public class TestConfig implements CommandLineRunner{
 		en6.getStudentGrade().addAll(Arrays.asList(2.1,0.4,2.6));
 		Enrollment en7 = new Enrollment(null, stu3, sub2);
 		en7.getStudentGrade().addAll(Arrays.asList(3.9,5.0,4.3));
-		enrollmentRepository.saveAll(Arrays.asList(en1, en2, en3, en4, en5, en6, en7));
+		Enrollment en8 = new Enrollment(null, stu4, sub7);
+		en8.getStudentGrade().addAll(Arrays.asList(5.0,6.7,3.1));
+		Enrollment en9 = new Enrollment(null, stu4, sub8);
+		en9.getStudentGrade().addAll(Arrays.asList(3.9,5.0,2.9));
+
+
+		enrollmentRepository.saveAll(Arrays.asList(en1, en2, en3, en4, en5, en6, en7,en8,en9));
 
 	}	
 }
