@@ -41,8 +41,8 @@ public class Course implements Serializable{
     @JsonManagedReference
     private Set<Subject> subjects = new HashSet<>();
     
-    @OneToMany
-    @JoinColumn(name = "student_id")
+    @JsonIgnore
+    @OneToMany(mappedBy = "course")
     private Set<Student> students = new HashSet<>();
     
 	public Course() {
@@ -56,7 +56,7 @@ public class Course implements Serializable{
 		this.fee = fee;
 		this.limitDatePayment = limitDatePayment;
 	}
-	
+
 	public Set<Student> getStudents(){
 		return students;
 	}
@@ -101,6 +101,7 @@ public class Course implements Serializable{
 	public void setLimitDatePayment(Instant limitDatePayment) {
 		this.limitDatePayment = limitDatePayment;
 	}
+	
 	public Set<Subject> getSubjects(){
 		return subjects;
 	}

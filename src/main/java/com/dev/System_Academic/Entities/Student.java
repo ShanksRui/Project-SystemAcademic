@@ -18,6 +18,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -41,8 +42,9 @@ public class Student implements Serializable{
 	@JsonManagedReference
 	private Set<Enrollment> enrollments = new HashSet<>();
 	
-	@JsonManagedReference
-	@ManyToOne()
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "course_id")
 	private Course course;
 	
 	public Student() {
@@ -114,6 +116,7 @@ public class Student implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 
+	
 	public void setCourse(Course course) {
 		    if (enrollments == null || enrollments.isEmpty()) {
 		        this.course = course;
