@@ -41,8 +41,8 @@ public class Student implements Serializable{
 	@JsonManagedReference
 	private Set<Enrollment> enrollments = new HashSet<>();
 	
+	@JsonManagedReference
 	@ManyToOne()
-	@JsonBackReference
 	private Course course;
 	
 	public Student() {
@@ -60,14 +60,12 @@ public class Student implements Serializable{
 	    double monthly = course.getMonthlyPayment();
 	    double feeAmount = monthly * course.getFee();
 
-	    if (datePayment != null && course != null && course.getLimitDatePayment() != null) {
 	        if (datePayment.isAfter(course.getLimitDatePayment())) {
 	            return monthly + feeAmount;
 	        } else {
 	            return monthly;
 	        }        
 	    }
-	}
 		return 0.0;
 }
 	public Set<Enrollment> getEnrollments(){
@@ -117,14 +115,18 @@ public class Student implements Serializable{
 	}
 
 	public void setCourse(Course course) {
-		boolean value = enrollments.stream()
-			    .map(Enrollment::getSubject)
-			    .anyMatch(subject -> course.getSubjects().contains(subject));
-	    if(value) {
-	    	this.course = course;		
-		}else {
-			throw new IllegalArgumentException("subjects registration materials are not associated with this course");
+		    if (enrollments == null || enrollments.isEmpty()) {
+		        this.course = course;
+		        return;
+		    }
+		    boolean value = enrollments.stream()
+		        .map(e -> e.getSubject().getCourse())
+		        .allMatch(subjectCourse -> subjectCourse.equals(course));
+		    if (value) {
+		        this.course = course;
+		    } else {
+		        throw new IllegalArgumentException("subjects registration materials are not associated with this course");
+		    }
 		}
-		
-	}
+
 }

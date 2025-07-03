@@ -10,6 +10,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -41,7 +42,6 @@ public class Course implements Serializable{
     private Set<Subject> subjects = new HashSet<>();
     
     @OneToMany
-    @JsonManagedReference
     @JoinColumn(name = "student_id")
     private Set<Student> students = new HashSet<>();
     
