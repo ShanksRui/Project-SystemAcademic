@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.dev.System_Academic.Entities.Student;
 import com.dev.System_Academic.Repositories.StudentRepository;
+import com.dev.System_Academic.Services.Exception.ResourceNotFoundException;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class StudentService {
@@ -21,15 +24,19 @@ public class StudentService {
 	
 	public Student findById(Long id) {
 		Optional<Student> obj = repository.findById(id);
-		return obj.get();
-	}
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+}	
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
 	public Student Update(Long id,Student student) {
+		try {
 		Student entity = repository.getReferenceById(id);
 		updateStudent(entity,student);
 		return repository.save(entity);
+		}catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);	
+		}
 	}
 
 	private void updateStudent(Student entity, Student student) {
