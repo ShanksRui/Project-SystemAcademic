@@ -3,11 +3,14 @@ package com.dev.System_Academic.Services;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.boot.model.relational.Database;
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dev.System_Academic.Entities.Student;
 import com.dev.System_Academic.Repositories.StudentRepository;
+import com.dev.System_Academic.Services.Exception.DataIntegrityViolationException;
 import com.dev.System_Academic.Services.Exception.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -26,8 +29,18 @@ public class StudentService {
 		Optional<Student> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 }	
+	public Student insert(Student student) {
+		return repository.save(student);
+	}
+	
 	public void deleteById(Long id) {
-		repository.deleteById(id);
+      if(!repository.existsById(id)){
+    	   throw new ResourceNotFoundException(id);
+      }try {
+    	  repository.deleteById(id);
+      }catch(DataIntegrityViolationException e) {
+    	  throw new DataIntegrityViolationException(e.getMessage());
+      }
 	}
 	public Student Update(Long id,Student student) {
 		try {
