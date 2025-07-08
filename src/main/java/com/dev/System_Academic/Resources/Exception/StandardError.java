@@ -7,7 +7,7 @@ public class StandardError {
 	private Instant moment;
 	private Integer status;
 	private String error;
-	private String erroMsg;
+	private String message;
 	private String path;
 	
 	
@@ -15,11 +15,11 @@ public class StandardError {
 
 	}
 
-	public StandardError(Instant moment, Integer status, String error, String erroMsg, String path) {
+	public StandardError(Instant moment, Integer status, String error, String message, String path) {
 		this.moment = moment;
 		this.status = status;
 		this.error = error;
-		this.erroMsg = erroMsg;
+		this.message = message;
 		this.path = path;
 	}
 
@@ -47,12 +47,12 @@ public class StandardError {
 		this.error = error;
 	}
 
-	public String getErroMsg() {
-		return erroMsg;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setErroMsg(String erroMsg) {
-		this.erroMsg = erroMsg;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public String getPath() {

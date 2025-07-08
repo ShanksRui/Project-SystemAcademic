@@ -3,8 +3,6 @@ package com.dev.System_Academic.Services;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.boot.model.relational.Database;
-import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
