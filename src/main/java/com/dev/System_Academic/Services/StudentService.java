@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.dev.System_Academic.Entities.Student;
 import com.dev.System_Academic.Repositories.StudentRepository;
-import com.dev.System_Academic.Services.Exception.DataIntegrityViolationException;
+import com.dev.System_Academic.Services.Exception.DatabaseException;
 import com.dev.System_Academic.Services.Exception.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -36,8 +37,8 @@ public class StudentService {
     	   throw new ResourceNotFoundException(id);
       }try {
     	  repository.deleteById(id);
-      }catch(DataIntegrityViolationException e) {
-    	  throw new DataIntegrityViolationException(e.getMessage());
+      }catch(DataIntegrityViolationException e ) {
+    	 throw new DatabaseException(e.getMessage());
       }
 	}
 	public Student Update(Long id,Student student) {

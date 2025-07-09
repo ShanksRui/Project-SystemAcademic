@@ -4,10 +4,10 @@ import java.time.Instant;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.dev.System_Academic.Services.Exception.DatabaseException;
 import com.dev.System_Academic.Services.Exception.ResourceNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,5 +27,16 @@ public class ResourceHandlerException {
          ste.setPath(request.getRequestURI());
          return ResponseEntity.status(status).body(ste);
 	}
+	@ExceptionHandler(DatabaseException.class)
+	public ResponseEntity<StandardError> DataIntegrity(DatabaseException e, HttpServletRequest request){
+    String erro = "DataError";
+    HttpStatus status = HttpStatus.BAD_REQUEST;
+    StandardError ste = new StandardError();
+    ste.setError(erro);
+    ste.setStatus(status.value());
+    ste.setMessage(e.getMessage());
+    ste.setMoment(Instant.now());
+    ste.setPath(request.getRequestURI());
+    return ResponseEntity.status(status).body(ste);	
+	}
 }
-
