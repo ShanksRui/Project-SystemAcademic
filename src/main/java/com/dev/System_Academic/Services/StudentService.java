@@ -27,7 +27,7 @@ public class StudentService {
 	public Student findById(Long id) {
 		Optional<Student> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
-}	
+    }	
 	public Student insert(Student student) {
 		return repository.save(student);
 	}

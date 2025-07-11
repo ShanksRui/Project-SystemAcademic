@@ -26,5 +26,8 @@ public class EnrollmentService {
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
+	public Enrollment insert (Enrollment enrollment) {
+		return repository.save(enrollment);
+	}
 	
 }

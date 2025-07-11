@@ -18,9 +18,11 @@ public class CourseService {
 	public List<Course> findAll() {
 		return repository.findAll();
 	}
-	
 	public Course findById(Long id) {
 		Optional<Course> obj = repository.findById(id);
 		return obj.get();
+	}
+	public Course insert (Course course) {
+		return repository.save(course);
 	}
 }
