@@ -37,9 +37,9 @@ public class StudentResource {
 	}
 	@PostMapping
 	public ResponseEntity<Student> insert(@RequestBody Student stu){
-		Student student = service.insert(stu);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(student.getId()).toUri();
-		return ResponseEntity.created(uri).body(student);
+		Student obj = service.insert(stu);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).body(obj);
 	}
 	
 	@DeleteMapping("/{id}")

@@ -3,11 +3,9 @@ package com.dev.System_Academic.Entities;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,7 +15,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 @Entity
 public class Course implements Serializable{
@@ -31,7 +28,6 @@ public class Course implements Serializable{
 	private String name;
 	private Double monthlyPayment;
 	private Double fee;
-	
 	
     @JsonFormat(shape = Shape.STRING,pattern = "yyyy:MM:dd'T'HH:mm:ss'Z'",timezone = "UTC")
 	private Instant limitDatePayment;

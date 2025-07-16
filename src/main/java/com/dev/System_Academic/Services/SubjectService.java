@@ -23,4 +23,8 @@ public class SubjectService {
 		Optional<Subject> obj = repository.findById(id);
 		return obj.get();
 	}
+	
+	public Subject insert(Subject subject) {
+		return repository.save(subject);
+	}
 }
