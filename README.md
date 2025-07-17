@@ -36,6 +36,7 @@ cursos e disciplinas, além da matrícula de alunos em disciplinas. Todos os end
 ---
 
 ##  Arquitetura do Projeto
+```
 System-Academic/
 ├── src/
 │   ├── main/
@@ -54,6 +55,7 @@ System-Academic/
 ├── Dockerfile
 ├── render.yaml
 ├── pom.xml
+```
 
 ## Sobre o uso do Docker
 
