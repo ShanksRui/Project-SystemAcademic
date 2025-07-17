@@ -57,6 +57,9 @@ System-Academic/
 ├── pom.xml
 ```
 
+## Diagrama UML - fluxo do sistema 
+![Diagrama UML](BPB1QI~1.PNG)
+
 ## Sobre o uso do Docker
 
 A aplicação foi preparada com um Dockerfile com o único objetivo de permitir o deploy no Render.com, já que a plataforma não oferece suporte nativo ao Java. O Dockerfile especifica a versão do Java (Eclipse Temurin 21) e empacota a aplicação.
