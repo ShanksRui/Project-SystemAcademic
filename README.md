@@ -1,6 +1,6 @@
 #  System Academic
 
-Sistema de gerenciamento acadêmico desenvolvido com **Spring Boot** e **Java 21**, estruturado com boas práticas de arquitetura (camadas de controller, service, repository e DTOs). O sistema permite o cadastro de professores, alunos, 
+Sistema de gerenciamento acadêmico desenvolvido com **Spring Boot** e **Java 21**, estruturado com boas práticas de arquitetura (camadas de controller, service, repository). O sistema permite o cadastro de professores, alunos, 
 cursos e disciplinas, além da matrícula de alunos em disciplinas. Todos os endpoints são RESTful.
 
 >  Atualmente, o projeto está em fase final de desenvolvimento. A próxima etapa será o deploy em produção, mas estou enfrentando alguns desafios na configuração com a plataforma **Render**.
