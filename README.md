@@ -3,7 +3,7 @@
 Sistema de gerenciamento acadêmico desenvolvido com **Spring Boot** e **Java 21**, estruturado com boas práticas de arquitetura (camadas de controller, service, repository). O sistema permite o cadastro de professores, alunos, 
 cursos e disciplinas, além da matrícula de alunos em disciplinas. Todos os endpoints são RESTful.
 
->  Atualmente, o projeto está em fase final de desenvolvimento. A próxima etapa será o deploy em produção, mas estou enfrentando alguns desafios na configuração com a plataforma **Render**.
+>  Atualmente, o projeto está feito e deploy em produção.
 
 ---
 
@@ -17,7 +17,7 @@ cursos e disciplinas, além da matrícula de alunos em disciplinas. Todos os end
 - H2 (testes locais)
 - Maven
 - Docker(usado apenas para especificar ambiente Java no Render)
-- Render (deploy em andamento)
+- Render
 
 ---
 
@@ -31,7 +31,7 @@ cursos e disciplinas, além da matrícula de alunos em disciplinas. Todos os end
 - [x] Endpoints REST
 - [x] Persistência com JPA/HIBERNATE
 - [x] Banco de dados relacional (H2/PostgreSQL)
-- [ ] Deploy em produção *(em progresso)*
+- [x] Deploy em produção *(feito)*
 
 ---
 
@@ -64,9 +64,8 @@ System-Academic/
 
 A aplicação foi preparada com um Dockerfile com o único objetivo de permitir o deploy no Render.com, já que a plataforma não oferece suporte nativo ao Java. O Dockerfile especifica a versão do Java (Eclipse Temurin 21) e empacota a aplicação.
 
- Observações Finais
-
-    Ainda não utilizo Swagger para documentação da API.
-    A última fase do projeto consiste em concluir o deploy no Render.
-    O foco principal foi aplicar na prática os conhecimentos de Spring Boot, Java moderno, JPA e PostgreSQL.
+ Observações Finais 
+ 
+    Ainda não utilizo Swagger para documentação da API 
+    O foco principal foi aplicar na prática os conhecimentos de Spring Boot, Java moderno, JPA e PostgreSQL  
 
