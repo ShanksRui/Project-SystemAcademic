@@ -58,7 +58,7 @@ System-Academic/
 ```
 
 ## Diagrama UML - fluxo do sistema 
-![Diagrama UML](BPB1QI~1.PNG)
+![Diagrama UML](diagrama.png)
 
 ## Sobre o uso do Docker
 
